@@ -7,14 +7,13 @@ import google.generativeai as genai
 # Configuración de Gemini
 # genai.configure(api_key=mi_clave_api)
 try:
-    mi_clave_api = st.secrets["general"]["AIzaSyD320gGKhrwJRQ894VQTY8ahfJUErNDJp8"] 
+    # Leer el secreto sin el encabezado [general]
+    mi_clave_api = st.secrets["GEMINI_API_KEY"] 
     
-    # 2. Configuración de Gemini (solo si la clave se encontró)
     genai.configure(api_key=mi_clave_api)
     
 except KeyError:
-    st.error("Error Crítico: La clave GEMINI_API_KEY no se encontró en los Secrets de Streamlit Cloud.")
-    # Si la clave no se encuentra, la aplicación se detiene.
+    st.error("Error Crítico: La clave GEMINI_API_KEY no se encontró.")
     st.stop()
 # 2. Configura el modelo con las instrucciones de tu GEM
 
