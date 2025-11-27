@@ -1,6 +1,7 @@
 import streamlit as st
 import google.generativeai as genai
-#import os
+import os
+import style
 
 # 1. Configura tu API Key
 # mi_clave_api = os.environ.get("AIzaSyCmzs5uu3U6Un4b7BDuEvJ0MaS34FPb3Hg")
@@ -15,6 +16,7 @@ try:
 except KeyError:
     st.error("Error Crítico: La clave GEMINI_API_KEY no se encontró.")
     st.stop()
+    
 # 2. Configura el modelo con las instrucciones de tu GEM
 
 instrucciones_gem = """
@@ -129,6 +131,9 @@ model = genai.GenerativeModel(
     model_name="gemini-2.5-flash",
     system_instruction=instrucciones_gem
 )
+
+# --- INYECCIÓN DE ESTILO ---
+style.load_fluid_geometry_style() # <-- ¡NUEVA LLAMADA A LA FUNCIÓN DE DISEÑO!
 
 # --- INTERFAZ WEB CORREGIDA ---
 st.title("Analisis de Riesgo Crediticio")
