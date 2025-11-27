@@ -1,6 +1,6 @@
 import streamlit as st
 import google.generativeai as genai
-import os
+#import os
 
 # 1. Configura tu API Key
 # mi_clave_api = os.environ.get("AIzaSyCmzs5uu3U6Un4b7BDuEvJ0MaS34FPb3Hg")
