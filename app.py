@@ -152,7 +152,9 @@ if prompt := st.chat_input("Escribe tu consulta aquí..."):
     # --- NUEVO CÓDIGO DE SUBIDA Y USO DEL ARCHIVO ---
     try:
         # 1. Subir el archivo (temporalmente) a la API para la consulta
-        archivo_pdf_subido = genai.upload_file(path="/content/QUÉ ES EL RIESGO CREDITICIO.pdf") 
+        # archivo_pdf_subido = genai.upload_file(path="/content/QUÉ ES EL RIESGO CREDITICIO.pdf") 
+        # Cambiar la ruta para que apunte al archivo subido en GitHub
+        archivo_pdf_subido = genai.upload_file(path="QUÉ ES EL RIESGO CREDITICIO.pdf")
         
         # 2. El contenido de la solicitud incluye el texto y el archivo subido
         contenido_solicitud = [prompt, archivo_pdf_subido]
