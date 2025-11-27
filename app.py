@@ -3,10 +3,19 @@ import google.generativeai as genai
 import os
 
 # 1. Configura tu API Key
-mi_clave_api = os.environ.get("AIzaSyCmzs5uu3U6Un4b7BDuEvJ0MaS34FPb3Hg")
+# mi_clave_api = os.environ.get("AIzaSyCmzs5uu3U6Un4b7BDuEvJ0MaS34FPb3Hg")
 # Configuración de Gemini
-genai.configure(api_key=mi_clave_api)
-
+# genai.configure(api_key=mi_clave_api)
+try:
+    mi_clave_api = st.secrets["general"]["AIzaSyD320gGKhrwJRQ894VQTY8ahfJUErNDJp8"] 
+    
+    # 2. Configuración de Gemini (solo si la clave se encontró)
+    genai.configure(api_key=mi_clave_api)
+    
+except KeyError:
+    st.error("Error Crítico: La clave GEMINI_API_KEY no se encontró en los Secrets de Streamlit Cloud.")
+    # Si la clave no se encuentra, la aplicación se detiene.
+    st.stop()
 # 2. Configura el modelo con las instrucciones de tu GEM
 
 instrucciones_gem = """
