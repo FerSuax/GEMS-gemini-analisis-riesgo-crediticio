@@ -19,16 +19,17 @@ def load_fluid_geometry_style():
     }
 
     /* 2. LIMPIEZA DE ARTEFACTOS Y FRANJAS VACÍAS */
-    /* Apunta a contenedores vacíos o contenedores que no tienen contenido de usuario */
-    div.stContainer:has( > div:only-child[data-testid="stVerticalBlock"]) {
-        display: none; /* Elimina las franjas superiores que no tienen uso */
+    /* Apunta a contenedores que Streamlit usa para espacio y los oculta de manera selectiva. */
+    .stApp > header {
+        display: none !important; /* Oculta la cabecera por defecto de Streamlit */
     }
-    /* Elimina el espacio blanco extra alrededor del título y cabeceras */
-    header {
-        visibility: hidden;
-        height: 0px !important;
+    div[data-testid="stVerticalBlock"] > div:first-child {
+        display: none; /* Elimina el primer contenedor vacío (la primera franja) */
     }
-    /* Ocultar el footer y la marca de agua */
+    div[data-testid="stVerticalBlock"] > div:nth-child(2) {
+        margin-top: -2rem; /* Sube ligeramente el contenido para eliminar el margen superior */
+    }
+    /* El resto de la limpieza se mantiene */
     footer {visibility: hidden;}
 
     /* 3. ESTILO DEL TÍTULO CENTRAL (H1) */
