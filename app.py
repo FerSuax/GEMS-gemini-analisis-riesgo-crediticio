@@ -141,8 +141,8 @@ st.set_page_config(
 # --- INYECCIÓN DE ESTILO ---
 style.load_fluid_geometry_style() # <-- ¡NUEVA LLAMADA A LA FUNCIÓN DE DISEÑO!
 
-# --- INTERFAZ WEB ---# --- TÍTULO DE LA APLICACIÓN ---
-# Usamos un contenedor para inyectar CSS que centre el título
+# --- TÍTULO DE LA APLICACIÓN ---
+# Usamos el contenedor para inyectar CSS que centre el título
 with st.container():
     st.markdown("""
     <style>
