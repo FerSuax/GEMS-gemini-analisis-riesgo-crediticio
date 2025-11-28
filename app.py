@@ -131,14 +131,31 @@ model = genai.GenerativeModel(
     model_name="gemini-2.5-flash",
     system_instruction=instrucciones_gem
 )
-
+# --- CONFIGURACIÓN INICIAL DE PÁGINA ---
+# Debe ser la primera instrucción de Streamlit
+st.set_page_config(
+    page_title="Riesgo Crediticio IA", 
+    #page_icon="⚖️", # Emoji de balanza para simbolizar evaluación/riesgo
+    layout="wide" # Opcional: usar el layout ancho para más espacio.
+)
 # --- INYECCIÓN DE ESTILO ---
 style.load_fluid_geometry_style() # <-- ¡NUEVA LLAMADA A LA FUNCIÓN DE DISEÑO!
 
-# --- INTERFAZ WEB CORREGIDA ---
-st.title("Analisis de Riesgo Crediticio")
+# --- INTERFAZ WEB ---# --- TÍTULO DE LA APLICACIÓN ---
+# Usamos un contenedor para inyectar CSS que centre el título
+with st.container():
+    st.markdown("""
+    <style>
+    .centered-title {
+        text-align: center;
+        padding-top: 1rem;
+        padding-bottom: 2rem;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    st.markdown("<h1 class='centered-title'>Análisis de Riesgo Crediticio</h1>", unsafe_allow_html=True)
 
-# ¡CORRECCIÓN CLAVE! Inicializamos el historial de mensajes al principio.
+# Inicializamos el historial de mensajes al principio.
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
