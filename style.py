@@ -10,6 +10,7 @@ def load_fluid_geometry_style():
     /* 1. Fondo fluido con degradados */
     body {
         background: linear-gradient(135deg, #1A1A2E 0%, #0F0F2A 50%, #0A0A1F 100%); /* Degradado base */
+        background-color: #1A1A2E !important; /* fallback si el degradado falla */
     }
     .stApp {
         background-color: transparent; /* Permite ver el degradado del body */
