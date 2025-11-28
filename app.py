@@ -153,34 +153,26 @@ if prompt := st.chat_input("¿Qué quieres analizar hoy?"):
         st.markdown(prompt)
     st.session_state.messages.append({"role": "user", "content": prompt})
 
-    # --- INSTRUCCIÓN DE FORMATO ADICIONAL (Para el UX/UI) ---
+    # --- INSTRUCCIÓN DE FORMATO ADICIONAL ---
     formato_estructurado = """
     Aplica el siguiente formato estricto a tu respuesta:
     1. Comienza con un Título de Conclusión de Nivel 2 (##) indicando el Nivel de Riesgo (BAJO, MEDIO, ALTO).
     2. Utiliza una Lista de Puntos para desglosar métricas o factores clave.
     3. Usa Negritas (**) para resaltar todos los datos numéricos y conclusiones importantes.
     """
-    
-    # Combinamos el prompt del usuario con la instrucción de formato
     prompt_con_formato = f"{prompt}\n\n{formato_estructurado}"
             
     # --- Lógica de Generación de Contenido ---
     try:
-        # Se usa el prompt_con_formato en lugar del prompt original
-        
-        # 1. Subir el archivo (temporalmente) a la API para la consulta
-        # Esto envuelve la subida del PDF en el spinner
-        with st.spinner("Evaluando informacion y generando análisis de riesgo..."):
+        # Se envuelve la lógica en el spinner para feedback al usuario
+        with st.spinner("Evaluando información y generando análisis de riesgo..."):
             archivo_pdf_subido = genai.upload_file(path="QUÉ ES EL RIESGO CREDITICIO.pdf") 
             
-            # 2. El contenido de la solicitud incluye el texto, el archivo subido y el formato
             contenido_solicitud = [prompt_con_formato, archivo_pdf_subido]
 
-            # 3. Generar respuesta usando el archivo
             response = model.generate_content(contenido_solicitud)
             text_response = response.text
 
-            # 4. Limpiar: Eliminar el archivo de la API después de usarlo
             genai.delete_file(archivo_pdf_subido.name)
 
     except Exception as e:
